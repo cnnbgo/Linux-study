@@ -114,11 +114,11 @@ systemctl status webdav
 http://你的ip地址:81
 ```
 
-
-
-
-# wto
-这里编辑的是什么
+# miui11海外版play商店网络DNS问题\
+自定义防火墙规则添加如下，原理很简单，阻止全部dns转发
+```
+iptables -I FORWARD 1 -p udp -j REJECT
+```
 
 
 # wto
