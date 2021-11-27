@@ -32,5 +32,81 @@ passwd
 
 
 
+# 配置webdav非docker方式
+参考链接：
+https://zhuanlan.zhihu.com/p/382569744
+https://github.com/hacdias/webdav/
+
+1. 下载webdav程序，arm64版本\
+wget https://github.com/hacdias/webdav/releases/download/v4.1.1/linux-arm64-webdav.tar.gz
+
+2. 解压、复制到/usr/bin目录下
+tar -zxvf linux-armv7-webdav.tar.gz
+sudo cp webdav /usr/bin/
+
+3. 注册service
+cd /etc/systemd/system
+sudo vim webdav.service
+写入如下内容
+[Unit]
+Description=WebDAV server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/webdav --config /etc/webdav/config.yaml
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+4. 建立配置文件，和上面/etc/systemd/system/webdav.service里的ExecStart目录要对应上
+cd /etc/webdav/
+sudo vim config.yaml
+写入
+# Server related settings
+address: 0.0.0.0
+port: 21234
+auth: true
+tls: false
+cert: cert.pem
+key: key.pem
+
+# Default user settings (will be merged)
+scope: .
+modify: true
+rules: []
+
+users:
+  - username: admin
+    password: admin
+    #这里为共享目录
+    scope: /你的共享目录
+开机并启动服务
+systemctl enable webdav
+systemctl start webdav
+查看运行状态
+systemctl status webdav
+不报错的话直接输入
+
+http://你的ip地址:21234
+
+
+
+
+
 # wto
 这里编辑的是什么
+
+
+# wto
+这里编辑的是什么
+
+
+# wto
+这里编辑的是什么
+
+# wto
+这里编辑的是什么
+
