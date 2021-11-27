@@ -4,7 +4,7 @@
 https://hub.docker.com/r/sulinggg/openwrt
 https://mlapp.cn/376.html
 
-1.宿主机配置\
+1. 宿主机配置\
 打开网卡混杂模式\
 sudo ip link set eth0 promisc on
 
@@ -18,7 +18,7 @@ docker pull registry.cn-shanghai.aliyuncs.com/suling/openwrt:rpi4\
 创建并启动容器openwrt\
 docker run --restart always --name openwrt -d --network macnet --privileged registry.cn-shanghai.aliyuncs.com/suling/openwrt:rpi4 /sbin/init
 
-2.进入容器并修改相关参数\
+2. 进入容器并修改相关参数\
 docker exec -it openwrt bash
 
 修改网络配置\
